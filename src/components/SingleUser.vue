@@ -11,7 +11,7 @@
               <h3>{{ user.name }} {{ user.family }}</h3>
               <ul class="mb-5 mt-3">
                 <li v-for="(course, index) in user.courses" :key="index">
-                  <h6 class="course">{{ course }}</h6>
+                  <h6 class="course">{{ course.name }}</h6>
                 </li>
               </ul>
               <h6 class="text-muted">

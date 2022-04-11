@@ -11,7 +11,7 @@
 
 <script>
 import { BContainer } from "bootstrap-vue";
-import users from "../users";
+import {mapGetters} from 'vuex'
 import TopHeader from "../components/TopHeader.vue";
 import SingleUser from "../components/SingleUser.vue";
 export default {
@@ -20,14 +20,14 @@ export default {
     SingleUser,
     TopHeader,
   },
-  data() {
-    return {
-      users: [],
-    };
-  },
-  created() {
-    this.users = users;
-  },
+
+  computed:{
+    ...mapGetters(['users']),
+  }
+ 
+  // created() {
+  //   this.users = users;
+  // },
 };
 </script>
 

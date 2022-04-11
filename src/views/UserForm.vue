@@ -1,5 +1,5 @@
 <template>
-  <form @submit="addTeacher">
+  <form @submit="addTeacher" class="text-center">
     <BaseInput
       label="Username"
       type="text"
@@ -62,6 +62,7 @@ import BaseButton from '../BaseComponents/BaseButton.vue'
 import BaseTextArea from '../BaseComponents/BaseTextArea.vue'
 import SelectCity from '../components/selectCity.vue'
 import RadioButton from '../components/RadioButton.vue'
+import {mapMutations} from 'vuex'
 export default {
 components:{
     BaseInput,
@@ -82,7 +83,6 @@ data(){
         aboutTeacher:'',
         aboutClass: '',
         courses:[],
-        teacherList: []
     }
 },
 methods:{
@@ -93,15 +93,17 @@ const course = {name:this.courseName}
    this.courseName = ""
     },
 
+    ...mapMutations(['addUser']),
+
 addTeacher(e){
     e.preventDefault();
     if(this.username===""||this.familyName===""||
-    this.gender===""||this.courses.length===0||
-    this.city===""||this.rate===""||this.aboutTeacher===""||this.aboutClass===""){
+    this.gender===""||this.courses.length===0||this.rate===""||this.aboutTeacher===""||this.aboutClass===""){
         return console.log('fill all fields')
     }
 
     const teacher = {
+      id: Math.floor(Math.random() * 1000),
     name:this.username,
     family: this.familyName,
     time: this.teachingTime,
@@ -113,8 +115,9 @@ addTeacher(e){
     aboutClass: this.aboutClass,
     }
 
-   this.teacherList.push(teacher)
-   console.log(this.teacherList)
+  //  this.teacherList.push(teacher)
+  this.addUser(teacher)
+
    this.username =""
      this.familyName=""
     this.teachingTime=""

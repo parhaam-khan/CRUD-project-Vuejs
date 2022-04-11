@@ -6,7 +6,7 @@ import UserTable from './views/UserTable.vue'
 const routes = [
     {path: '/', component: UserList},
     {path:'/user-form', component:UserForm},
-    {path:'/UserTable', component:UserTable},
+    {path:'/user-table', component:UserTable},
     {path: '/user/:id',name:'userDetail', component: UserDetail},
     
 ]
