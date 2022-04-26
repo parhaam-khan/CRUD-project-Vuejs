@@ -1,5 +1,7 @@
 <template>
-  <b-card class="mb-3 shadow card">
+  <b-card
+   :class="['mb-3 shadow card',
+    {'bg-male': user.gender === 'مرد' , 'bg-female':user.gender ==='زن'}]">
     <b-row no-gutters>
       <b-col class="col" md="3">
         <b-card-img class="cardImage" :src="user.image"></b-card-img>
@@ -9,24 +11,26 @@
           <b-row>
             <b-col md="5">
               <h3>{{ user.name }} {{ user.family }}</h3>
-              <ul class="mb-5 mt-3">
+              <div class="user-info">
+              <ul class="course-list mb-4 mt-3">
                 <li v-for="(course, index) in user.courses" :key="index">
                   <h6 class="course">{{ course.name }}</h6>
                 </li>
               </ul>
+              </div>
               <h6 class="text-muted">
                 <font-awesome-icon icon="fa-solid fa-location-dot" />
                 {{ user.city }}
               </h6>
               <h6 class="text-muted">
                 <font-awesome-icon icon="fa-solid fa-clock" />
-                {{ user.courseHours }} ساعت تدریس
+                {{ user.time }} ساعت تدریس
               </h6>
               <h6 class="text-muted">
                 <span class="star-icon">
                   <font-awesome-icon icon="fa-solid fa-star"/>
                   </span>
-                {{ user.rate }} | از {{ user.allRate }} نفر
+               {{user.rate}} | از 248 نفر
               </h6>
             </b-col>
             <b-col class="about" md="7">
@@ -38,13 +42,13 @@
                   درباره مدرس
                 </h5>
                 <h6 class="about text-muted">
-                  {{ user.about }}
+                  {{ user.aboutTeacher }}
                 </h6>
               </div>
               <div class="mt-5 text-center">
                 <h6>
                   هزینه 1 ساعت کلاس :
-                  <span class="price"> {{ user.price }} هزار تومان </span>
+                  <span class="price">  110هزار تومان  </span>
                 </h6>
                 <router-link
                   class="link"
@@ -53,19 +57,20 @@
                     params: {
                       id: user.id,
                       name: user.name,
-                      family: user.family,
+                      family: user.family,                     
                       image: user.image,
                       courses: user.courses,
                       city: user.city,
-                      courseHours: user.courseHours,
+                      time: user.time,
                       rate: user.rate,
-                      allRate: user.allRate,
-                      price: user.price,
-                      about: user.about,
+                      aboutTeacher: user.aboutTeacher,
+                      aboutClass:user.aboutClass
                     },
                   }"
                 >
-                  <h6 class="see-more">مشاهده پروفایل/رزرو کلاس</h6>
+                   <BaseButton :_class="'see-more'">
+                    مشاهده پروفایل/رزرو کلاس
+                   </BaseButton>
                 </router-link>
               </div>
             </b-col>
@@ -77,14 +82,10 @@
 </template>
 
 <script>
-import { BCard, BCardImg, BRow, BCol, BCardBody } from "bootstrap-vue";
+import BaseButton from '../BaseComponents/BaseButton.vue'
 export default {
   components: {
-    BRow,
-    BCol,
-    BCardBody,
-    BCardImg,
-    BCard,
+    BaseButton
   },
 
   props: ["user"],
@@ -97,38 +98,57 @@ export default {
 }
 .cardImage {
   border-radius: 50%;
+  height: 250px;
+  object-fit: contain;
 }
 .about {
   line-height: 30px;
+  height: 5rem;
 }
 .link {
   text-decoration: none;
 }
 .see-more {
   padding: 13px 30px;
-  background: #21a57c;
+  width: 100%;
+  border: none;
+  background: #1d1560;
   color: #fff;
   border-radius: 5px;
 }
 .see-more:hover{
     transition: .2s all ease-in-out;
-    background: #29d09c;
+    background: #433c8a;
 }
 
 ul li::marker {
   color: #2898c7;
 }
 .price {
-  color: #21a57c;
+  color: #228aae;
 }
 .star-icon {
   color: #f6f50f;
 }
 .taecher-icon{
-    color: #2c2e2e;
+    color: #3d3d41;
+}
+.course-list{
+   column-count: 2;
+  padding-right: 1rem;
 }
 .course{
     color:#2c2e2e ;
+    margin-right: 0;
     font-weight: 700;
+}
+.user-info{
+  height: 7rem;
+}
+.bg-male{
+  background: #e6ebfd;
+}
+.bg-female{
+  background: #feebf8;
 }
 </style>

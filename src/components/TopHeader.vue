@@ -1,21 +1,20 @@
 <template>
-  <div class="mb-5">
-    <div class="text-center mb-5 bg-light py-3">
-      <h3 class="item-length">{{ users.length }} مورد نتایج جستجوی شما</h3>
-    </div>
+  <div class="mb-5 shadow main-menu">
+        <b-container>
     <div>
       <b-nav>
-        <b-nav-item class="first-item" disabled>
-        <span class="ms-2"><font-awesome-icon icon="fa-solid fa-sort" /></span>  مرتب سازی بر اساس:
-        </b-nav-item>
-        <b-nav-item class="item"> محبوب ترین </b-nav-item>
-        <b-nav-item class="item"> در دسترس ترین زمان </b-nav-item>
-        <b-nav-item class="item"> بیشترین نظر </b-nav-item>
-        <b-nav-item class="item"> ارزانترین </b-nav-item>
-        <b-nav-item class="item"> گرانترین</b-nav-item>
-        <b-nav-item class="item">جدیدترین</b-nav-item>
+        <b-nav-item to="/"
+         :class="['item-first',{'active-item': $route.name=='UserList'}]">
+        <font-awesome-icon icon="fa-solid fa-house" />
+         صفحه اصلی 
+         </b-nav-item>
+        <b-nav-item to="/user-table" 
+         :class="['item',{'active-item': $route.name=='UserTable'}]">
+         جدول مدرسین 
+         </b-nav-item>
       </b-nav>
     </div>
+        </b-container>
   </div>
 </template>
 
@@ -31,22 +30,37 @@ export default {
 </script>
 
 <style scoped>
-.item-length {
-  color: #650952;
+.main-menu{
+  padding: 20px;
+  background: #f5fcfd;
 }
-.first-item a {
-  font-size: 18px;
-  font-weight: 500;
+.main-menu ul{
+  padding-right: 0;
+}
+.item-first a{
+  padding-right: 2px;
+    padding-left: 5px;
+    color: #2e3132;
+}
+.item{
+margin-right: 5px;
 }
 .item a {
-  color: #86928f;
-}
-.item a:hover {
+  color: #2e3132;
+  }
+.item a:hover , .item-first a:hover {
   color: #fff;
 }
-.item:hover {
+.item:hover, .item-first:hover {
   transition: 0.2s all ease-in-out;
-  background: #72175d;
+  background: #1d1560;
   border-radius: 5px;
+}
+.active-item{
+  background: #1d1560;
+  border-radius: 5px;
+}
+.active-item a{
+  color: #fff;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <button type="button" @click="addCourse">
-      {{text}}
+  <button :class="_class" :type="type" @click="$emit('clickHandler', $event)">
+      <slot></slot>
   </button>
 </template>
 
@@ -8,8 +8,9 @@
 export default {
     name: 'BaseButton',
 props:{
+    type: String,
     text: String,
-    addCourse:Function,
+    _class: String,
 }
 }
 </script>

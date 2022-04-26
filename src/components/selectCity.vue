@@ -1,22 +1,43 @@
 <template>
-  <div class="ir-select select">
-      {{label}}
-    <select class="ir-province"></select>
-    <select @input="$emit('input', $event.target.value)" class="ir-city"></select>
+<div class="mt-4">
+    <div class="mb-1">
+<label for="city">
+    <h5>
+    شهر
+    </h5>
+    </label>
+    </div>
+  <select :value="value"  @input="$emit('input', $event.target.value)" class="select" name="city" id="city">
+      <option class="city" :value="province.name" v-for="province in provinces" :key="province.id">
+          {{province.name}}
+      </option>
+  </select>
 </div>
 </template>
 
 <script>
+import provinces from '../provinces.json'
 export default {
-name:'SelectCity',
-props:{
-    label:String,
+    props:['value'],
+data(){
+    return{
+        provinces,
+    }
 }
 }
 </script>
 
-<style scoped>
+<style>
 .select{
-    margin: 10px 0;
+    width: 100%;
+     border: 1px solid #7e7a89;
+  border-radius: 5px;
+}
+.city{
+    color: #393b3c;
+}
+select:focus{
+    outline:none ;
+    border: 2px solid #1a6883;
 }
 </style>
